@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.github.mzanthem.mapper.BzCodeMapper" >
+  <resultMap id="BaseResultMap" type="io.github.mzanthem.model.BzCode" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bz_code" property="bzCode" jdbcType="VARCHAR" />
+    <result column="bz_name" property="bzName" jdbcType="VARCHAR" />
+    <result column="bz_desc" property="bzDesc" jdbcType="VARCHAR" />
+    <result column="bz_mode" property="bzMode" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="lifecycle" property="lifecycle" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bz_code, bz_name, bz_desc, bz_mode, app_id, version, lifecycle, operator, create_time, 
+    modified_time, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="io.github.mzanthem.model.BzCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jcl_bz_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from jcl_bz_code
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from jcl_bz_code
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="io.github.mzanthem.model.BzCodeExample" >
+    delete from jcl_bz_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.github.mzanthem.model.BzCode" >
+    insert into jcl_bz_code (id, bz_code, bz_name, 
+      bz_desc, bz_mode, app_id, 
+      version, lifecycle, operator, 
+      create_time, modified_time, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{bzCode,jdbcType=VARCHAR}, #{bzName,jdbcType=VARCHAR}, 
+      #{bzDesc,jdbcType=VARCHAR}, #{bzMode,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{lifecycle,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.github.mzanthem.model.BzCode" >
+    insert into jcl_bz_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bzCode != null" >
+        bz_code,
+      </if>
+      <if test="bzName != null" >
+        bz_name,
+      </if>
+      <if test="bzDesc != null" >
+        bz_desc,
+      </if>
+      <if test="bzMode != null" >
+        bz_mode,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="lifecycle != null" >
+        lifecycle,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bzCode != null" >
+        #{bzCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bzName != null" >
+        #{bzName,jdbcType=VARCHAR},
+      </if>
+      <if test="bzDesc != null" >
+        #{bzDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bzMode != null" >
+        #{bzMode,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lifecycle != null" >
+        #{lifecycle,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null" >
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.github.mzanthem.model.BzCodeExample" resultType="java.lang.Integer" >
+    select count(*) from jcl_bz_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jcl_bz_code
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.bzCode != null" >
+        bz_code = #{record.bzCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bzName != null" >
+        bz_name = #{record.bzName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bzDesc != null" >
+        bz_desc = #{record.bzDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bzMode != null" >
+        bz_mode = #{record.bzMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appId != null" >
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.lifecycle != null" >
+        lifecycle = #{record.lifecycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedTime != null" >
+        modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jcl_bz_code
+    set id = #{record.id,jdbcType=BIGINT},
+      bz_code = #{record.bzCode,jdbcType=VARCHAR},
+      bz_name = #{record.bzName,jdbcType=VARCHAR},
+      bz_desc = #{record.bzDesc,jdbcType=VARCHAR},
+      bz_mode = #{record.bzMode,jdbcType=VARCHAR},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=INTEGER},
+      lifecycle = #{record.lifecycle,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.github.mzanthem.model.BzCode" >
+    update jcl_bz_code
+    <set >
+      <if test="bzCode != null" >
+        bz_code = #{bzCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bzName != null" >
+        bz_name = #{bzName,jdbcType=VARCHAR},
+      </if>
+      <if test="bzDesc != null" >
+        bz_desc = #{bzDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bzMode != null" >
+        bz_mode = #{bzMode,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lifecycle != null" >
+        lifecycle = #{lifecycle,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.github.mzanthem.model.BzCode" >
+    update jcl_bz_code
+    set bz_code = #{bzCode,jdbcType=VARCHAR},
+      bz_name = #{bzName,jdbcType=VARCHAR},
+      bz_desc = #{bzDesc,jdbcType=VARCHAR},
+      bz_mode = #{bzMode,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      lifecycle = #{lifecycle,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
